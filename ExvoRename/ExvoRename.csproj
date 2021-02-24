@@ -112,12 +112,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="copying\WindowsAPICodePack\COPYING" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)data" "$(TargetDir)data" /D/E/I/Y
-xcopy "$(ProjectDir)copying" "$(TargetDir)copying" /D/E/I/Y</PostBuildEvent>
+xcopy "$(SolutionDir)copying" "$(TargetDir)copying" /D/E/I/Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
