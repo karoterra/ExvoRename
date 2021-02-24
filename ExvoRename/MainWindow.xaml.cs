@@ -34,6 +34,11 @@ namespace ExvoRename
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _Voices = new List<VoiceList>();
+            if (!Directory.Exists("data"))
+            {
+                ShowError("dataフォルダが見つかりません");
+                return;
+            }
             var csvFiles = Directory.GetFiles("data", "*.csv");
             foreach (var csvFilePath in csvFiles)
             {
