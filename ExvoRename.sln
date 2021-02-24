@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExvoRename", "ExvoRename\ExvoRename.csproj", "{5AE99D7C-229A-4FAB-835B-28B95B04150C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5AE99D7C-229A-4FAB-835B-28B95B04150C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE99D7C-229A-4FAB-835B-28B95B04150C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE99D7C-229A-4FAB-835B-28B95B04150C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE99D7C-229A-4FAB-835B-28B95B04150C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BF0CD687-B5D0-4134-BA7C-A0324C6B5D63}
+	EndGlobalSection
+EndGlobal
