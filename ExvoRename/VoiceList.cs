@@ -33,9 +33,9 @@ namespace ExvoRename
 
                     var item = new VoiceItem()
                     {
-                        Id = int.Parse(values[0]),
+                        Id = int.Parse(values[0].ConvertNumZenToHan()),
                         FolderName = values[1],
-                        VoiceId = values[2],
+                        VoiceId = values[2].ConvertNumZenToHan(),
                         Line = values[3],
                     };
                     Items.Add(item);
