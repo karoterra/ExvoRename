@@ -24,6 +24,7 @@ namespace ExvoRename
     public partial class MainWindow : Window
     {
         private List<VoiceList> _Voices;
+        private Encoding[] _Encodings;
 
         public MainWindow()
         {
@@ -49,6 +50,10 @@ namespace ExvoRename
             Debug.Print($"{_Voices.Count}");
 
             exVoiceSelector.ItemsSource = _Voices.Select(x => x.Name);
+
+            _Encodings = new Encoding[] { Encoding.GetEncoding(932), Encoding.UTF8 };
+            encodingSelector.ItemsSource = new string[] { "Shift-JIS", "UTF-8" };
+            encodingSelector.SelectedIndex = 0;
         }
 
         private void browseExVoiceButton_Click(object sender, RoutedEventArgs e)
@@ -77,12 +82,29 @@ namespace ExvoRename
 
         private void renameWithVoiceIdButton_Click(object sender, RoutedEventArgs e)
         {
-            Rename(FileNameStyle.VoiceId);
+            Rename(FileNameStyle.VoiceId, TextModeFromRadioButton());
         }
 
         private void renameWithVoiceIdLineButton_Click(object sender, RoutedEventArgs e)
         {
-            Rename(FileNameStyle.VoiceId_Line);
+            Rename(FileNameStyle.VoiceId_Line, TextModeFromRadioButton());
+        }
+
+        private TextMode TextModeFromRadioButton()
+        {
+            if (textGenerateRadioButton.IsChecked ?? false)
+            {
+                return TextMode.Generate;
+            }
+            if (textDeleteRadioButton.IsChecked ?? false)
+            {
+                return TextMode.Delete;
+            }
+            if (textNopRadioButton.IsChecked ?? false)
+            {
+                return TextMode.Nop;
+            }
+            return TextMode.Nop;
         }
 
         private bool CheckInput()
@@ -121,7 +143,32 @@ namespace ExvoRename
             return true;
         }
 
-        private void Rename(FileNameStyle style)
+        private bool RenameFile(string source, string dest)
+        {
+            if (source == dest)
+            {
+                return false;
+            }
+            if (File.Exists(dest))
+            {
+                var result = MessageBox.Show(
+                    $"{dest}は既に存在します。\n{source}を{dest}に上書きリネームしますか？",
+                    "確認",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                );
+                if (result == MessageBoxResult.No)
+                {
+                    return false;
+                }
+                File.Delete(dest);
+            }
+            
+            File.Move(source, dest);
+            return true;
+        }
+
+        private void Rename(FileNameStyle style, TextMode textMode)
         {
             if (!Verify())
             {
@@ -134,28 +181,35 @@ namespace ExvoRename
             foreach (var item in voiceList.Items)
             {
                 var current = item.GetCurrentFilePath(voiceRoot);
+                var newPath = item.GetNewFilePath(voiceRoot, style);
                 if (current != null)
                 {
-                    string newFilePath = item.GetNewFilePath(voiceRoot, style);
-                    if (current == newFilePath)
+                    var result = RenameFile(current, newPath);
+                    if (result)
                     {
-                        continue;
+                        renameCount++;
                     }
-                    if (File.Exists(newFilePath))
-                    {
-                        var result = MessageBox.Show(
-                            $"{newFilePath}は既に存在します。\n{current}を{newFilePath}にリネームしますか？",
-                            "確認",
-                            MessageBoxButton.YesNo,
-                            MessageBoxImage.Warning
-                        );
-                        if (result == MessageBoxResult.No)
+                }
+
+                current = item.GetCurrentFilePath(voiceRoot, "txt");
+                newPath = item.GetNewFilePath(voiceRoot, style, "txt");
+                switch (textMode)
+                {
+                    case TextMode.Generate:
+                        if (current != null)
                         {
-                            continue;
+                            RenameFile(current, newPath);
                         }
-                    }
-                    File.Move(current, newFilePath);
-                    renameCount++;
+                        Encoding encoding = _Encodings[encodingSelector.SelectedIndex];
+                        bool newline = newlineCheckBox.IsChecked ?? true;
+                        item.CreateTextFile(voiceRoot, style, encoding, newline);
+                        break;
+                    case TextMode.Delete:
+                        if (current != null)
+                        {
+                            File.Delete(current);
+                        }
+                        break;
                 }
             }
 

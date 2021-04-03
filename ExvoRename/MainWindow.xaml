@@ -10,22 +10,42 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="35"/>
-            <RowDefinition Height="150*"/>
-            <RowDefinition Height="150*"/>
+            <RowDefinition Height="108"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="66*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="42"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="52"/>
         </Grid.ColumnDefinitions>
-        <Label Content="場所" VerticalAlignment="Center" Height="25"/>
-        <TextBox x:Name="exVoicePathTextBox" TextWrapping="Wrap" Grid.Column="1" VerticalAlignment="Center" Height="20"/>
-        <Button x:Name="browseExVoiceButton" Content="参照" Click="browseExVoiceButton_Click" Grid.Column="2" VerticalAlignment="Center" Height="19" Margin="0,0,5,0"/>
-        <ComboBox x:Name="exVoiceSelector" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="21"/>
-        <Label Content="種類" Grid.Row="1" VerticalAlignment="Center" Height="25"/>
-        <Button x:Name="verifyButton" Content="確認" Click="verifyButton_Click" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="19" Margin="0,0,5,0"/>
-        <Button x:Name="renameWithVoiceIdButton" Content="番号だけ" Click="renameWithVoiceIdButton_Click" Grid.Column="1" Grid.Row="2" Margin="0,5,0,0"/>
-        <Button x:Name="renameWithVoiceIdLineButton" Content="番号とセリフ" Click="renameWithVoiceIdLineButton_Click" Grid.Column="1" Grid.Row="3" Margin="0,0,0,5"/>
+        <Label Content="場所" VerticalAlignment="Center" Height="25" Margin="0,5"/>
+        <TextBox x:Name="exVoicePathTextBox" TextWrapping="Wrap" Grid.Column="1" VerticalAlignment="Center" Height="20" Margin="0,8,0,7"/>
+        <Button x:Name="browseExVoiceButton" Content="参照" Click="browseExVoiceButton_Click" Grid.Column="2" VerticalAlignment="Center" Height="19" Margin="0,8,5,8"/>
+        <ComboBox x:Name="exVoiceSelector" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Height="21" Margin="0,7"/>
+        <Label Content="種類" Grid.Row="1" VerticalAlignment="Center" Height="25" Margin="0,5"/>
+        <Button x:Name="verifyButton" Content="確認" Click="verifyButton_Click" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="19" Margin="0,8,5,8"/>
+        <Button x:Name="renameWithVoiceIdButton" Content="番号だけ" Click="renameWithVoiceIdButton_Click" Grid.Column="1" Grid.Row="3" Margin="0"/>
+        <Button x:Name="renameWithVoiceIdLineButton" Content="番号とセリフ" Click="renameWithVoiceIdLineButton_Click" Grid.Column="1" Grid.Row="4" Margin="0,0,0,5"/>
+        <Label Content="テキスト" Margin="0" Grid.Row="2" VerticalAlignment="Top" Height="26"/>
+        <StackPanel Grid.Column="1" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Top" Orientation="Horizontal" Height="15">
+            <RadioButton x:Name="textGenerateRadioButton" Content="生成する" HorizontalAlignment="Left" IsChecked="True"/>
+            <RadioButton x:Name="textDeleteRadioButton" Content="削除する" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+            <RadioButton x:Name="textNopRadioButton" Content="なにもしない"/>
+        </StackPanel>
+        <GroupBox Grid.Column="1" Header="テキスト生成オプション" Margin="0,25,0,5" Grid.Row="2">
+            <StackPanel Margin="0">
+                <Grid Height="26">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="64"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="文字コード" Margin="0"/>
+                    <ComboBox x:Name="encodingSelector" Margin="0" Grid.Column="1"/>
+                </Grid>
+                <CheckBox x:Name="newlineCheckBox" Content="最後に改行を入れる" Margin="0" IsChecked="True"/>
+            </StackPanel>
+        </GroupBox>
 
     </Grid>
 </Window>

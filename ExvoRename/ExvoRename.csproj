@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TextMode.cs" />
     <Compile Include="VoiceItem.cs" />
     <Compile Include="VoiceList.cs" />
     <Page Include="MainWindow.xaml">
