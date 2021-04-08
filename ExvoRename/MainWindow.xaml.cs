@@ -98,6 +98,23 @@ namespace ExvoRename
             Rename(FileNameStyle.VoiceId_Line, TextModeFromRadioButton());
         }
 
+        private void textModeRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (textGenerateOptionBox == null)
+            {
+                return;
+            }
+            switch (TextModeFromRadioButton())
+            {
+                case TextMode.Generate:
+                    textGenerateOptionBox.IsEnabled = true;
+                    break;
+                default:
+                    textGenerateOptionBox.IsEnabled = false;
+                    break;
+            }
+        }
+
         private TextMode TextModeFromRadioButton()
         {
             if (textGenerateRadioButton.IsChecked ?? false)

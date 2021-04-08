@@ -29,11 +29,11 @@
         <Button x:Name="renameWithVoiceIdLineButton" Content="番号とセリフ" Click="renameWithVoiceIdLineButton_Click" Grid.Column="1" Grid.Row="4" Margin="0,0,0,5"/>
         <Label Content="テキスト" Margin="0" Grid.Row="2" VerticalAlignment="Top" Height="26"/>
         <StackPanel Grid.Column="1" Margin="0,5,0,0" Grid.Row="2" VerticalAlignment="Top" Orientation="Horizontal" Height="15">
-            <RadioButton x:Name="textGenerateRadioButton" Content="生成する" HorizontalAlignment="Left" IsChecked="True"/>
-            <RadioButton x:Name="textDeleteRadioButton" Content="削除する" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-            <RadioButton x:Name="textNopRadioButton" Content="なにもしない"/>
+            <RadioButton x:Name="textGenerateRadioButton" Content="生成する" HorizontalAlignment="Left" IsChecked="True" Checked="textModeRadioButton_Checked"/>
+            <RadioButton x:Name="textDeleteRadioButton" Content="削除する" HorizontalAlignment="Left" Margin="5,0,0,0" Checked="textModeRadioButton_Checked"/>
+            <RadioButton x:Name="textNopRadioButton" Content="なにもしない" Checked="textModeRadioButton_Checked"/>
         </StackPanel>
-        <GroupBox Grid.Column="1" Header="テキスト生成オプション" Margin="0,25,0,5" Grid.Row="2">
+        <GroupBox x:Name="textGenerateOptionBox" Grid.Column="1" Header="テキスト生成オプション" Margin="0,25,0,5" Grid.Row="2">
             <StackPanel Margin="0">
                 <Grid Height="26">
                     <Grid.ColumnDefinitions>
