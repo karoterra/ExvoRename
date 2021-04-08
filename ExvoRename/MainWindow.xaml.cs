@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,6 +35,10 @@ namespace ExvoRename
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var assembly = Assembly.GetExecutingAssembly().GetName();
+            var ver = assembly.Version;
+            Title = $"ExvoRename - えくぼ りねーむ {ver.Major}.{ver.Minor}.{ver.Build}";
+            
             _Voices = new List<VoiceList>();
             if (!Directory.Exists("data"))
             {
