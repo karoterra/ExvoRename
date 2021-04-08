@@ -43,9 +43,17 @@ namespace ExvoRename
             var csvFiles = Directory.GetFiles("data", "*.csv");
             foreach (var csvFilePath in csvFiles)
             {
-                var voiceList = new VoiceList(csvFilePath);
-                _Voices.Add(voiceList);
-                Debug.Print($"{voiceList.Name}, {voiceList.Items.Count}");
+                try
+                {
+                    var voiceList = new VoiceList(csvFilePath);
+                    _Voices.Add(voiceList);
+                    Debug.Print($"{voiceList.Name}, {voiceList.Items.Count}");
+                }
+                catch (Exception ex)
+                {
+                    string msg = $"\"{csvFilePath}\"にて以下の問題が見つかりました。\n{ex.Message}";
+                    ShowError(msg);
+                }
             }
             Debug.Print($"{_Voices.Count}");
 

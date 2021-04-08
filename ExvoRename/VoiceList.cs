@@ -41,6 +41,34 @@ namespace ExvoRename
                     Items.Add(item);
                 }
             }
+
+            Verify();
+        }
+
+        public void Verify()
+        {
+            var idDup = Items
+                .GroupBy(item => item.Id)
+                .Where(grp => grp.Count() >= 2)
+                .Select(grp => grp.Key);
+            if (idDup.Count() > 0)
+            {
+                string msg = $"ID {string.Join(", ", idDup)} は重複しています";
+                throw new Exception(msg);
+            }
+
+            foreach (var folder in Items.GroupBy(item => item.FolderName))
+            {
+                var voiceIdDup = folder
+                    .GroupBy(item => item.VoiceId)
+                    .Where(grp => grp.Count() >= 2)
+                    .Select(grp => grp.Key);
+                if (voiceIdDup.Count() > 0)
+                {
+                    string msg = $"フォルダ\"{folder.Key}\"の音声No {string.Join(", ", voiceIdDup)} は重複しています";
+                    throw new Exception(msg);
+                }
+            }
         }
     }
 }
